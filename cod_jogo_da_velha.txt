@@ -1,0 +1,110 @@
+
+//CÓDIGO DO JOGO DA VELHA.
+
+#include <stdio.h>
+#include <stdlib.h>
+char nomex[15], nomeo[15];
+int z, j1=0, j2=0, emp=0;
+void tabuleiro(char jogos2 [3][3]) {
+	system("cls");
+	z++;
+	
+	printf (" %c | %c | %c \n", jogos2[0][0], jogos2[0][1], jogos2[0][2]);
+	printf("-------------\n");
+	printf (" %c | %c | %c \n", jogos2[1][0], jogos2[1][1], jogos2[1][2]);
+	printf("-------------\n");
+	printf (" %c | %c | %c \n", jogos2[2][0], jogos2[2][1], jogos2[2][2]);
+		system("color c2");
+}
+int main (){
+system("color e1");
+printf ("insira o nome do primeiro jogador(a): ");
+scanf("%s", &nomex);
+system("color b1");
+printf ("insira o nome do segundo jogador(a): ");
+scanf("%s", &nomeo);
+
+	char jogos [3][3];
+	char res;
+	int cont, l, i, j, c, vez=0;
+	do{
+		cont=1;
+		for(i=0; i<3; i++){
+			for(j=0; j<3; j++){
+				jogos[i][j]=' ';
+			}
+		}
+		do{
+			tabuleiro(jogos);
+			if(vez%2==0){
+				printf("%s [X] \n", nomex);
+				system("color e1");
+			}else{
+				system("color b1");
+					printf("%s [O] \n", nomeo);
+			}
+			
+			printf("digite a linha: ");
+			scanf("%i", &l);
+			printf("digite a coluna: ");
+			scanf("%i", &c);
+			if(l<1 || c<1 || l>3 || c>3){
+				l=0;
+				c=0;
+			}else if(jogos[l-1][c-1]!= ' '){
+				l=0;
+				c=0;
+			} else{
+				if(vez%2==0){
+					jogos[l-1][c-1] ='X';
+				}else{
+						jogos[l-1][c-1] ='O';
+				}
+				vez++;
+				cont++;
+			}
+			
+if(jogos[0][0]=='X' && jogos[0][1]=='X' && jogos[0][2]=='X'){ cont = 11;  }
+if(jogos[1][0]=='X' && jogos[1][1]=='X' && jogos[1][2]=='X'){ cont = 11; }
+if(jogos[2][0]=='X' && jogos[2][1]=='X' && jogos[2][2]=='X'){ cont = 11; }
+if(jogos[0][0]=='X' && jogos[1][0]=='X' && jogos[2][0]=='X'){ cont = 11; }
+if(jogos[0][1]=='X' && jogos[1][1]=='X' && jogos[2][1]=='X'){ cont = 11; }
+if(jogos[0][2]=='X' && jogos[1][2]=='X' && jogos[2][2]=='X'){ cont = 11; }
+if(jogos[0][0]=='X' && jogos[1][1]=='X' && jogos[2][2]=='X'){ cont = 11; }
+if(jogos[0][2]=='X' && jogos[1][1]=='X' && jogos[2][0]=='X'){ cont = 11; }
+
+if(jogos[0][0]=='O' && jogos[0][1]=='O' && jogos[0][2]=='O'){ cont = 12; }
+if(jogos[1][0]=='O' && jogos[1][1]=='O' && jogos[1][2]=='O'){ cont = 12; }
+if(jogos[2][0]=='O' && jogos[2][1]=='O' && jogos[2][2]=='O'){ cont = 12; }
+if(jogos[0][0]=='O' && jogos[1][0]=='O' && jogos[2][0]=='O'){ cont = 12; }
+if(jogos[0][1]=='O' && jogos[1][1]=='O' && jogos[2][1]=='O'){ cont = 12; }
+if(jogos[0][2]=='O' && jogos[1][2]=='O' && jogos[2][2]=='O'){ cont = 12; }
+if(jogos[0][0]=='O' && jogos[1][1]=='O' && jogos[2][2]=='O'){ cont = 12; }
+if(jogos[0][2]=='O' && jogos[1][1]=='O' && jogos[2][0]=='O'){ cont = 12; }
+			
+			
+		}while(cont<=9);
+		
+					tabuleiro(jogos);
+		if(cont==10){
+			printf("DEU VELHA! \n");
+			emp++;
+		}if(cont==11){
+			printf("%s GANHOU!\n", nomex);
+			j1++;
+		}if(cont==12){
+			printf("%s GANHOU!\n", nomeo);
+			j2++;
+		}
+		
+		printf("vai jogar novamente? [S ou N]\n");
+		scanf("%s", &res);
+	}while(res== 's');
+		system("color f1");
+	printf("%d EMPATES.\n", emp);
+    printf("%d VITORIA DE %s \n", j1, nomex);
+    printf("%d VITORIA DE %s \n", j2, nomeo);
+	
+}
+
+
